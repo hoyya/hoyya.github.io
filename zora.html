@@ -1,0 +1,78 @@
+<html>
+	<head>
+		
+		<script src="https://rawgit.com/typicaljoe/taffydb/master/taffy.js"></script>
+		<script src="https://rawgit.com/mholt/papaparse/master/papaparse.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+				
+		<script type="text/javascript" src="https://s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+
+		
+		<script language="javascript">
+			
+			var db_1bdrm = TAFFY();
+			var db_2bdrm = TAFFY();
+			var db_3bdrm = TAFFY();
+			var db_4bdrm = TAFFY();
+			var db_5bdrm = TAFFY();
+			var db_studio = TAFFY();
+			var db_SFR = TAFFY();
+			var db_condo = TAFFY();
+			var db_duplex = TAFFY();
+			var db_multifamily = TAFFY();
+				
+			function fill_Data(){
+				var testData = db_2bdrm({State:"NY",}).get();
+				document.getElementById('MyEdit').innerHTML = JSON.stringify(testData, null, 25);
+				
+				
+			}	
+
+			function parseData(url, table){			
+				Papa.parse(url, {
+					download: true,
+					header: true,
+					complete: function(results) {
+						table.insert(results.data);
+						console.log("All done!");
+						if(table == db_2bdrm){fill_Data();}
+					}
+				});
+			}
+			
+	
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_1Bedroom.csv", db_1bdrm);
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_2Bedroom.csv", db_2bdrm);
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_3Bedroom.csv", db_3bdrm);
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_4Bedroom.csv", db_4bdrm);
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_5BedroomOrMore.csv", db_5bdrm);			
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv", db_studio)
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv", db_SFR)
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv", db_condo)
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv", db_duplex)
+			parseData("http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv", db_multifamily)
+
+
+		</script>
+		
+
+	</head>
+	<body>
+		<div id ="MyEdit" onload="fill_data()">
+			"this is a test"
+		</div>	
+		<button id="open-popup">Subscribe to our mailing list</button>
+	</body>
+	
+	<script>
+		function showMailingPopUp() {
+			require(["mojo/signup-forms/Loader"], function(L) { L.start({"http://":"mc.us13.list-manage.com","uuid":"87cf3af02765066be960fa6ea","lid":"4c8ef277e4"}) })
+				document.cookie = "MCEvilPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+		};
+
+		document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
+	</script>
+
+	
+	
+</html>
