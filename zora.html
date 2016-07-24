@@ -1,13 +1,281 @@
 <html>
 	<head>
-		
+		<style>
+			.dropbtn {
+			    background-color: #4CAF50;
+			    color: white;
+			    padding: 16px;
+			    font-size: 16px;
+			    border: none;
+			    cursor: pointer;
+			}
+			
+			.dropdown {
+			    position: relative;
+			    display: inline-block;
+			}
+			
+			.dropdown-content {
+			    display: none;
+			    position: absolute;
+			    background-color: #f9f9f9;
+			    min-width: 160px;
+			    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			}
+			
+			.dropdown-content a {
+			    color: black;
+			    padding: 12px 16px;
+			    text-decoration: none;
+			    display: block;
+			}
+			
+			.dropdown-content a:hover {background-color: #f1f1f1}
+			
+			.dropdown:hover .dropdown-content {
+			    display: block;
+			}
+			
+			.dropdown:hover .dropbtn {
+			    background-color: #3e8e41;
+			}
+		</style>
+
+
 		<script src="https://rawgit.com/typicaljoe/taffydb/master/taffy.js"></script>
-		<script src="https://rawgit.com/mholt/papaparse/master/papaparse.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script type="text/javascript" src="https://s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
-		<script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"https://":"mc.us13.list-manage.com","uuid":"87cf3af02765066be960fa6ea","lid":"4c8ef277e4"}) })</script>				
-		
-		<script language="javascript">
+        <script type="text/javascript" src="https://s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+		<script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"https://":"mc.us13.list-mana ge.com","uuid":"87cf3af02765066be960fa6ea","lid":"4c8ef277e4"}) })</script>	
+
+
+
+
+
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_1Bedroom.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2010-02, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_1bdrm.insert(rsp.query.results.row);
+	            db_1bdrm({RegionName:"RegionName"}).remove();
+	            console.log(rsp);
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+	    
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank,  2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+
+	            db_studio.insert(rsp.query.results.row);
+	            db_studio({RegionName:"RegionName"}).remove();
+
+	            console.log(rsp);
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+	    		
+	
+    		
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_2Bedroom.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_2bdrm.insert(rsp.query.results.row);
+	            db_2bdrm({RegionName:"RegionName"}).remove();
+	            console.log(rsp);
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+	   
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_3Bedroom.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2010-02, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_3bdrm.insert(rsp.query.results.row);
+	            db_3bdrm({RegionName:"RegionName"}).remove();	            
+	            console.log(rsp);
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+	   
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_4Bedroom.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_4bdrm.insert(rsp.query.results.row);
+	            db_4bdrm({RegionName:"RegionName"}).remove();
+	            console.log(rsp);
+	            
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+	   
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_5BedroomOrMore.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_5bdrm.insert(rsp.query.results.row);
+	            db_5bdrm({RegionName:"RegionName"}).remove();
+
+	            console.log(rsp);
+
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+	    
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Sfr.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2010-02, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_SFR.insert(rsp.query.results.row);
+	            db_SFR({RegionName:"RegionName"}).remove();
+
+	            console.log(rsp);
+
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_DuplexTriplex.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_duplex.insert(rsp.query.results.row);
+	            db_duplex({RegionName:"RegionName"}).remove();
+
+	            console.log(rsp);
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+	    		
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_CondoCoop.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2010-02, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_condo.insert(rsp.query.results.row);
+	            db_condo({RegionName:"RegionName"}).remove();
+
+	            console.log(rsp);
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Mfr5Plus.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2010-02, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_multifamily.insert(rsp.query.results.row);
+	            db_multifamily({RegionName:"RegionName"}).remove();
+
+	            console.log(rsp);
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    </script>
+	    
+		<script type="text/javascript">
+	      $(document).ready(function() {
+	        $.ajax({
+	          url: 'http://query.yahooapis.com/v1/public/yql',
+	          data: { 
+	            q:"select * from csv where url='http://files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_AllHomes.csv' and columns='RegionName,City,State,Metro,CountyName,SizeRank, 2010-02, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06'",
+	            format: 'json'
+	          },
+	          dataType: 'jsonp',
+	          success: function(rsp) {
+	            db_condoSFR.insert(rsp.query.results.row);
+	            db_condoSFR({RegionName:"RegionName"}).remove();
+
+	            console.log(rsp);
+	            // iterate over rsp.query.results.row (an array)
+	          }
+	        });
+	      });
+	    	    
+	    </script>
+
+	    
+	    <script language="javascript">
 			
 			var db_1bdrm = TAFFY();
 			var db_2bdrm = TAFFY();
@@ -19,48 +287,92 @@
 			var db_condo = TAFFY();
 			var db_duplex = TAFFY();
 			var db_multifamily = TAFFY();
-				
-			function fill_Data(){
-				var testData = db_2bdrm({State:"NY",}).get();
-				document.getElementById('MyEdit').innerHTML = JSON.stringify(testData, null, 25);
-				
-				
-			}	
+			var db_condoSFR = TAFFY();
+			
+		
+		</script>
 
-			function parseData(url, table){			
-				Papa.parse(url, {
-					download: true,
-					header: true,
-					complete: function(results) {
-						table.insert(results.data);
-						console.log("All done!");
-						if(table == db_2bdrm){fill_Data();}
-					}
+
+		
+
+	
+		<script src="http://listjs.com/no-cdn/list.js"></script>
+		<link rel="stylesheet" type="text/css" href="liststyle.css">
+	
+	</head>
+	<body>
+		<script>
+			var residenceType="";
+			
+			function set_type(selection) {
+				residenceType = selection;
+			}	
+		</script>
+		
+		<script>
+			function fill_regionArray(){
+			var options = {
+			  valueNames: [ 'region' ]
+			};
+			
+			
+			var userList = new List('regions',options);
+							
+					
+				console.log(residenceType);				
+				var regionArray = eval(residenceType + "().select(\"RegionName\")"); //red(residenceType);
+				console.log(regionArray);
+				
+				regionArray.forEach(function(item){
+				   //var option = document.createElement('option');
+				   //option.text=item;
+				   //option.value = item;
+				   //list.appendChild(option);
+				   
+				   userList.add({region: item});
 				});
 			}
 			
+
+					</script>
+		
+		<div class="dropdown">
+		  <button class="dropbtn">Select Residence Type</button>
+		  <div class="dropdown-content">
+		    <a href="#" onclick='set_type("db_1bdrm");fill_regionArray();' >1 Bedroom</a>
+		    <a href="#" onclick='set_type("db_2bdrm");fill_regionArray();' >2 Bedroom</a>
+		    <a href="#" onclick='set_type("db_3bdrm");fill_regionArray();' >3 Bedroom</a>
+		    <a href="#" onclick='set_type("db_4bdrm");fill_regionArray();' >4 Bedroom</a>
+		    <a href="#" onclick='set_type("db_5bdrm");fill_regionArray();' >5+ Bedroom</a>		    
+		    <a href="#" onclick='set_type("db_studio");fill_regionArray();' >Studio</a>		    
+		    <a href="#" onclick='set_type("db_SFR");fill_regionArray();' >Single Family Residence</a>		    
+		    <a href="#" onclick='set_type("db_condo");fill_regionArray();' >Condo</a>
+		    <a href="#" onclick='set_type("db_duplex");fill_regionArray();' >Duplex/Triplex</a>
+		    <a href="#" onclick='set_type("db_multifamily");fill_regionArray();' >MultiFamily Residence</a>
+		    <a href="#" onclick='set_type("db_condoSFR");fill_regionArray();' >Single Family Residence (Condo)</a>		    		    		    		    
+		  </div>
+		</div>	
+
 	
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_1Bedroom.csv/script.js", db_1bdrm);
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_2Bedroom.csv/script.js", db_2bdrm);
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_3Bedroom.csv/script.js", db_3bdrm);
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_4Bedroom.csv/script.js", db_4bdrm);
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_5BedroomOrMore.csv/script.js", db_5bdrm);			
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv/script.js", db_studio)
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv/script.js", db_SFR)
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv/script.js", db_condo)
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv/script.js", db_duplex)
-			parseData("//files.zillowstatic.com/research/public/Neighborhood/Neighborhood_MedianRentalPrice_Studio.csv/script.js", db_multifamily)
-
-
-		</script>
+	<div>
 		
-
-	</head>
-
-	<body>
 		
-		Hello World		
-
+		<div id="regions">
+		    <input class="search" placeholder="Search" />
+		    <button class="sort" data-sort="region">
+		      Sort by name
+		    </button>	
+		
+			<!<input name="ip_region" list="regions"/>
+			<!<list id="REEEGIONS"></datalist>
+		<ul class="list">
+	      <li>
+	        <h3 class="region"></h3>
+	      </li>
+	    </ul>
+		</div>		
+	</div>		
+		
 	</body>
 	
 </html>
