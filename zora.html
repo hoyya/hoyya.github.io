@@ -375,4 +375,13 @@
 		
 	</body>
 	
+	<script>
+		function showMailingPopUp() {
+			require(["mojo/signup-forms/Loader"], function(L) { L.start({"http://":"mc.us13.list-manage.com","uuid":"87cf3af02765066be960fa6ea","lid":"4c8ef277e4"}) })
+				document.cookie = "MCEvilPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+		};
+		document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
+	</script>
+
+
 </html>
